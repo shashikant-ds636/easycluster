@@ -7,7 +7,7 @@ script runs with no external downloads).
 import numpy as np
 import pandas as pd
 
-from easycluster import Cluster
+from clustereasy import Cluster
 
 np.random.seed(42)
 n = 200

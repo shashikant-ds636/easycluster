@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from easycluster import Cluster
-from easycluster.exceptions import InputValidationError, NotFittedError, ParameterError
+from clustereasy import Cluster
+from clustereasy.exceptions import InputValidationError, NotFittedError, ParameterError
 
 
 def test_fit_kmeans_basic(blob_df):

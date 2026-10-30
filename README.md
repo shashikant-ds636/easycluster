@@ -1,4 +1,4 @@
-# easycluster
+# clustereasy
 
 A beginner-friendly, consistent Python API that combines **K-Means** and
 **Agglomerative (Hierarchical) Clustering** on pandas DataFrames into one
@@ -8,7 +8,7 @@ Instead of re-learning different scikit-learn/SciPy calling conventions for
 each algorithm, you get one object with one set of methods for fitting,
 visualizing, evaluating, and exporting results — for both algorithms.
 
-## 1. Why easycluster
+## 1. Why clustereasy
 
 - One consistent interface for two different clustering algorithms.
 - Keeps your original DataFrame untouched.
@@ -20,7 +20,7 @@ visualizing, evaluating, and exporting results — for both algorithms.
 Local development install (editable):
 
 ```bash
-git clone https://github.com/your-username/easycluster.git
+git clone https://github.com/shashikant-ds636/easycluster.git
 cd easycluster
 pip install -e ".[dev]"
 ```
@@ -28,7 +28,7 @@ pip install -e ".[dev]"
 Once published, it will be installable with:
 
 ```bash
-pip install easycluster
+pip install clustereasy
 ```
 
 ## 3. Requirements
@@ -44,7 +44,7 @@ pip install easycluster
 
 ```python
 import pandas as pd
-from easycluster import Cluster
+from clustereasy import Cluster
 
 df = pd.read_csv("customers.csv")
 
@@ -69,7 +69,7 @@ result_df = cluster.get_clustered_data(column_name="Segment")
 
 - `data` must be a non-empty `pandas.DataFrame`. It is never modified.
 - `features`: optional list of column names to cluster on. Defaults to all
-  columns. Columns must exist, be unique, and be numeric — easycluster will
+  columns. Columns must exist, be unique, and be numeric — clustereasy will
   **not** silently convert text/categorical values into numbers. Encode
   categorical columns yourself first (e.g. `pd.get_dummies`) if you want to
   include them.
@@ -141,7 +141,7 @@ on an agglomerative model rather than faking support for it.
 - Cutting the dendrogram horizontally at a given height determines how many
   clusters you get at that distance.
 - For large datasets, pass `truncate_mode="lastp"` with a small `p` to avoid
-  an unreadable plot — easycluster will warn you above ~2000 samples if you
+  an unreadable plot — clustereasy will warn you above ~2000 samples if you
   don't.
 
 ## 10. Evaluation metrics and their limitations
@@ -261,7 +261,7 @@ guarantees (index preservation, immutability, reproducibility).
 pip install build twine
 python -m build                 # creates dist/*.whl and dist/*.tar.gz
 twine check dist/*
-pip install dist/easycluster-0.1.0-py3-none-any.whl  # test locally
+pip install dist/clustereasy-0.1.0-py3-none-any.whl  # test locally
 twine upload --repository testpypi dist/*             # TestPyPI first
 twine upload dist/*                                    # then real PyPI
 ```

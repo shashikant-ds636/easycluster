@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from easycluster import Cluster
+from clustereasy import Cluster
 
 np.random.seed(0)
 n = 120

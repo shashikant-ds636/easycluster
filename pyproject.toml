@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "easycluster"
+name = "clustereasy"
 version = "0.1.0"
 description = "A beginner-friendly, consistent API for K-Means and Agglomerative Clustering on pandas DataFrames."
 readme = "README.md"

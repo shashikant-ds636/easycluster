@@ -4,8 +4,8 @@ matplotlib.use("Agg")
 
 import pytest
 
-from easycluster import Cluster
-from easycluster.exceptions import InputValidationError, NotFittedError
+from clustereasy import Cluster
+from clustereasy.exceptions import InputValidationError, NotFittedError
 
 
 def test_plot_clusters_default_columns(blob_df):

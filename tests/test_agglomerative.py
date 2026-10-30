@@ -1,7 +1,7 @@
 import pytest
 
-from easycluster import Cluster
-from easycluster.exceptions import ParameterError
+from clustereasy import Cluster
+from clustereasy.exceptions import ParameterError
 
 
 def test_fit_agglomerative_basic(blob_df):

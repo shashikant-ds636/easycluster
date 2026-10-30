@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from easycluster import Cluster
-from easycluster.exceptions import InputValidationError
+from clustereasy import Cluster
+from clustereasy.exceptions import InputValidationError
 
 
 def test_valid_dataframe_constructs(blob_df):

@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from easycluster import Cluster
+from clustereasy import Cluster
 
 
 def test_get_labels_preserves_index(blob_df):

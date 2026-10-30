@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from easycluster import Cluster
-from easycluster.exceptions import ParameterError
+from clustereasy import Cluster
+from clustereasy.exceptions import ParameterError
 
 
 def test_silhouette_score_range(blob_df):
