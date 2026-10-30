@@ -33,8 +33,8 @@ dependencies = [
 dev = ["pytest>=7", "build", "twine"]
 
 [project.urls]
-Homepage = "https://github.com/shashikantgiri/easycluster"
-Issues = "https://github.com/shashikantgiri/easycluster/issues"
+Homepage = "https://github.com/shashikant-ds636/easycluster"
+Issues = "https://github.com/shashikant-ds636/easycluster/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
