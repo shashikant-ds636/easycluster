@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.1] - Documentation & branding release
+
+- Redesigned README as full documentation: logo/wordmark, badges (PyPI
+  version, Python versions, license, CI tests, Open-in-Colab), collapsible
+  reference sections, and side-by-side usage guides for Google Colab,
+  Jupyter, and plain Python/VS Code.
+- Added `docs/assets/logo.svg` / `logo.png`.
+- Added `examples/clustereasy_quickstart.ipynb`, a runnable Colab/Jupyter
+  notebook covering the full K-Means + Agglomerative workflow.
+- No functional/API changes from 0.1.0.
+
 ## [0.1.0] - Initial release
 
 - `Cluster` class wrapping K-Means and Agglomerative Clustering with a shared API.

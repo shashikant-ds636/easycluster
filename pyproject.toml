@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clustereasy"
-version = "0.1.0"
+version = "0.1.1"
 description = "A beginner-friendly, consistent API for K-Means and Agglomerative Clustering on pandas DataFrames."
 readme = "README.md"
 license = "MIT"
