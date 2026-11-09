@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/shashikant-ds636/easycluster/main/docs/assets/logo.png" alt="clustereasy logo" width="520"/>
 
-<h3>v0.1.1</h3>
+<h3>v0.1.2</h3>
 
 <p>
 One consistent, beginner-friendly API for <strong>K-Means</strong> and <strong>Agglomerative (Hierarchical) Clustering</strong> on pandas DataFrames.
@@ -394,7 +394,7 @@ guarantees (index preservation, immutability, reproducibility).
 pip install build twine
 python -m build
 twine check dist/*
-pip install dist/clustereasy-0.1.1-py3-none-any.whl  # test locally
+pip install dist/clustereasy-0.1.2-py3-none-any.whl  # test locally
 twine upload --repository testpypi dist/*             # TestPyPI first
 twine upload dist/*                                    # then PyPI
 ```

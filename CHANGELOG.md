@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.1.2] - Visualization refresh
+
+- Redesigned every plot in `visualization.py` with a consistent, modern
+  style: shared color palette, minimal chrome (no top/right spines, light
+  y-axis grid only), consistent title/label typography, and legends placed
+  outside the plot area instead of overlapping data.
+- `elbow_method()` now marks a suggested k on the chart as a visual hint
+  (still just a heuristic — doesn't change return value or API).
+- `plot_cluster_sizes()` now annotates each bar with its count.
+- `plot_silhouette()` labels each band by cluster and shows the average
+  score in the legend instead of just as an unlabeled line.
+- `plot_dendrogram()` colors sub-clusters below a distance threshold instead
+  of rendering everything in one flat color.
+- No functional/API changes: all method signatures, return values, and
+  parameters are unchanged from 0.1.1.
+
 ## [0.1.1] - Documentation & branding release
 
 - Redesigned README as full documentation: logo/wordmark, badges (PyPI
