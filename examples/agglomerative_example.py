@@ -19,8 +19,8 @@ df = pd.DataFrame(
 cluster = Cluster(data=df, features=["Age", "Annual Income"], scale=True)
 
 # 1. Inspect the dendrogram to get a feel for the structure
-Z = cluster.plot_dendrogram(method="ward", show=False)
-print("Linkage matrix shape:", Z.shape)
+cluster.plot_dendrogram(method="ward", show=False)
+print("Linkage matrix shape:", cluster.get_linkage_matrix().shape)
 
 # 2. Fit Agglomerative Clustering
 cluster.fit_agglomerative(n_clusters=3, linkage="ward")

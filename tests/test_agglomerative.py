@@ -52,11 +52,12 @@ def test_agglomerative_has_no_inertia(blob_df):
         c.inertia()
 
 
-def test_dendrogram_returns_linkage_matrix(blob_df):
+def test_dendrogram_returns_none_and_populates_linkage_matrix(blob_df):
     c = Cluster(data=blob_df)
-    Z = c.plot_dendrogram(method="ward", show=False)
+    result = c.plot_dendrogram(method="ward", show=False)
+    assert result is None
+    Z = c.get_linkage_matrix()
     assert Z.shape[0] == len(blob_df) - 1
-    assert (c.get_linkage_matrix() == Z).all()
 
 
 def test_dendrogram_ward_requires_euclidean(blob_df):

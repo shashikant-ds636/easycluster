@@ -27,8 +27,8 @@ df = pd.DataFrame(
 cluster = Cluster(data=df, features=["Annual Income", "Spending Score"], scale=True)
 
 # 2. Use the elbow method to help choose k
-elbow_table = cluster.elbow_method(max_clusters=8, show=False)
-print(elbow_table)
+cluster.elbow_method(max_clusters=8, show=False)
+print(cluster.elbow_results())
 
 # 3. Fit K-Means
 cluster.fit_kmeans(n_clusters=4, random_state=42)

@@ -45,6 +45,15 @@ class Cluster:
     Scaling changes distances, and therefore can change which clusters are
     found. K-Means cluster centers are stored in both the transformed
     (scaled) space and the original feature space (inverse-transformed).
+
+    Every `fit_*` method returns `self`, so fitting calls can be chained
+    (`cluster.fit_kmeans(3).plot_clusters(...)`). Every `plot_*` method and
+    `elbow_method` returns nothing: they only draw the plot, so a plotting
+    call left as the last line of a notebook cell shows just that plot —
+    never a second printed table or array underneath it. Use the matching
+    getter when you want the underlying data back: `elbow_results()`,
+    `get_linkage_matrix()`, `cluster_centers()`, `evaluate()`, `get_labels()`,
+    `get_clustered_data()`, `cluster_summary()`.
     """
 
     def __init__(
@@ -98,11 +107,14 @@ class Cluster:
     # ------------------------------------------------------------------ #
     # K-Means
     # ------------------------------------------------------------------ #
-    def elbow_method(self, max_clusters: int = 10, random_state: int = 42, show: bool = True) -> pd.DataFrame:
+    def elbow_method(self, max_clusters: int = 10, random_state: int = 42, show: bool = True) -> None:
         """Compute and plot WCSS (inertia) for k = 1..max_clusters.
 
         The elbow point is a heuristic for choosing k, not a guaranteed
         optimum — use it alongside silhouette_score() and domain knowledge.
+
+        Returns nothing (so a notebook cell shows only the plot). Call
+        elbow_results() afterwards to get the k/WCSS values as a DataFrame.
         """
         from sklearn.cluster import KMeans
 
@@ -123,7 +135,6 @@ class Cluster:
 
         self._elbow_results = pd.DataFrame({"n_clusters": ks, "wcss": wcss})
         _viz.plot_elbow(ks, wcss, show=show)
-        return self._elbow_results
 
     def fit_kmeans(
         self,
@@ -201,8 +212,12 @@ class Cluster:
     # ------------------------------------------------------------------ #
     # Hierarchical / Agglomerative
     # ------------------------------------------------------------------ #
-    def plot_dendrogram(self, method: str = "ward", metric: str = "euclidean", truncate_mode=None, p: int = 5, show: bool = True):
-        """Plot a dendrogram and return the linkage matrix."""
+    def plot_dendrogram(self, method: str = "ward", metric: str = "euclidean", truncate_mode=None, p: int = 5, show: bool = True) -> None:
+        """Plot a dendrogram.
+
+        Returns nothing (so a notebook cell shows only the plot). Call
+        get_linkage_matrix() afterwards to get the raw linkage matrix.
+        """
         import scipy.cluster.hierarchy as sch
 
         if method not in _VALID_LINKAGE:
@@ -221,7 +236,6 @@ class Cluster:
         Z = sch.linkage(self._X, method=method, metric=metric)
         self._linkage_matrix = Z
         _viz.plot_dendrogram_from_linkage(Z, truncate_mode=truncate_mode, p=p, show=show)
-        return Z
 
     def get_linkage_matrix(self):
         if self._linkage_matrix is None:
@@ -279,7 +293,8 @@ class Cluster:
     # ------------------------------------------------------------------ #
     # Shared visualization
     # ------------------------------------------------------------------ #
-    def plot_clusters(self, x: str, y: str, show_centers: bool = True, title=None, figsize=(7, 5), show: bool = True):
+    def plot_clusters(self, x: str, y: str, show_centers: bool = True, title=None, figsize=(7, 5), show: bool = True) -> None:
+        """Plot a 2D scatter of the fitted clusters. Returns nothing — just the plot."""
         self._require_fitted()
         if x not in self.features or y not in self.features:
             raise InputValidationError(
@@ -289,7 +304,7 @@ class Cluster:
         if show_centers and self._fitted_algorithm == "kmeans":
             centers_df = self.cluster_centers(original_scale=True)
             centers_original = centers_df[[x, y]].to_numpy()
-        return _viz.plot_cluster_scatter(
+        _viz.plot_cluster_scatter(
             self._raw_features,
             x,
             y,
@@ -301,18 +316,21 @@ class Cluster:
             show=show,
         )
 
-    def plot_cluster_sizes(self, show: bool = True):
+    def plot_cluster_sizes(self, show: bool = True) -> None:
+        """Plot cluster sizes as a bar chart. Returns nothing — just the plot."""
         self._require_fitted()
         sizes = pd.Series(self._labels).value_counts()
-        return _viz.plot_cluster_sizes(sizes, show=show)
+        _viz.plot_cluster_sizes(sizes, show=show)
 
-    def plot_silhouette(self, show: bool = True):
+    def plot_silhouette(self, show: bool = True) -> None:
+        """Plot the per-sample silhouette diagram. Returns nothing — just the plot."""
         self._require_fitted()
-        return _viz.plot_silhouette(self._X, self._labels, show=show)
+        _viz.plot_silhouette(self._X, self._labels, show=show)
 
-    def plot_pca(self, show: bool = True):
+    def plot_pca(self, show: bool = True) -> None:
+        """Plot a 2D PCA projection of the fitted clusters. Returns nothing — just the plot."""
         self._require_fitted()
-        return _viz.plot_pca_projection(self._X, self._labels, show=show)
+        _viz.plot_pca_projection(self._X, self._labels, show=show)
 
     # ------------------------------------------------------------------ #
     # Evaluation

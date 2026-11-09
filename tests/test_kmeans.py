@@ -28,13 +28,15 @@ def test_kmeans_reproducibility(blob_df):
     assert (c1.get_labels().to_numpy() == c2.get_labels().to_numpy()).all()
 
 
-def test_elbow_method_returns_dataframe(blob_df):
+def test_elbow_method_returns_none_and_populates_results(blob_df):
     c = Cluster(data=blob_df)
     result = c.elbow_method(max_clusters=5, show=False)
-    assert isinstance(result, pd.DataFrame)
-    assert list(result.columns) == ["n_clusters", "wcss"]
-    assert len(result) == 5
-    assert result["wcss"].is_monotonic_decreasing
+    assert result is None
+    table = c.elbow_results()
+    assert isinstance(table, pd.DataFrame)
+    assert list(table.columns) == ["n_clusters", "wcss"]
+    assert len(table) == 5
+    assert table["wcss"].is_monotonic_decreasing
 
 
 def test_elbow_method_validates_max_clusters(blob_df):

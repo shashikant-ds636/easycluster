@@ -4,7 +4,7 @@ Agglomerative Clustering on pandas DataFrames."""
 from .cluster import Cluster
 from .exceptions import EasyClusterError, InputValidationError, NotFittedError, ParameterError
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 __all__ = [
     "Cluster",

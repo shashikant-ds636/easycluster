@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.3] - Clean plotting output
+
+- `elbow_method()`, `plot_dendrogram()`, `plot_clusters()`,
+  `plot_cluster_sizes()`, `plot_silhouette()`, and `plot_pca()` now return
+  `None` instead of a DataFrame / linkage array / matplotlib `Axes`.
+  Previously, calling one of these as the last line of a notebook cell
+  made Jupyter auto-print that returned value *underneath* the plot (a
+  full WCSS table, a raw linkage array, or an `<Axes: ...>` repr line) —
+  this is fixed, so a plotting call now shows only the plot.
+- The underlying data is unaffected and still available through the
+  existing getters: `elbow_results()` for the k/WCSS table,
+  `get_linkage_matrix()` for the raw linkage matrix.
+- `fit_kmeans()` / `fit_agglomerative()` are unchanged and still return
+  `self`, so fit calls remain chainable
+  (`cluster.fit_kmeans(3).plot_clusters(...)`).
+- Updated README, example scripts, and tests to match.
+
 ## [0.1.2] - Visualization refresh
 
 - Redesigned every plot in `visualization.py` with a consistent, modern

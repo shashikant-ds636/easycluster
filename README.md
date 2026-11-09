@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/shashikant-ds636/easycluster/main/docs/assets/logo.png" alt="clustereasy logo" width="520"/>
 
-<h3>v0.1.2</h3>
+<h3>v0.1.3</h3>
 
 <p>
 One consistent, beginner-friendly API for <strong>K-Means</strong> and <strong>Agglomerative (Hierarchical) Clustering</strong> on pandas DataFrames.
@@ -186,7 +186,8 @@ Runnable end-to-end scripts also live in [`examples/`](examples/):
 cluster = Cluster(data=df, features=["Income", "Score"], scale=True)
 
 # Explore how many clusters might make sense
-elbow_table = cluster.elbow_method(max_clusters=10, random_state=42)
+cluster.elbow_method(max_clusters=10, random_state=42)   # shows just the plot
+elbow_table = cluster.elbow_results()                    # get the numbers back
 
 # Fit
 cluster.fit_kmeans(n_clusters=4, init="k-means++", n_init=10, random_state=42)
@@ -201,10 +202,11 @@ Supported `fit_kmeans` parameters: `n_clusters`, `init`, `n_init`, `max_iter`,
 scikit-learn's `KMeans`.
 
 **Elbow Method.** `elbow_method(max_clusters=10, random_state=42, show=True)`
-fits K-Means for k = 1..max_clusters, plots k vs. WCSS, and returns a
-DataFrame of results so you can reuse them without refitting. The elbow is a
-**heuristic**, not a guaranteed optimum — pair it with `silhouette_score()`
-and domain knowledge.
+fits K-Means for k = 1..max_clusters, plots k vs. WCSS, and returns `self`
+(so a notebook cell shows only the plot, not a table underneath it too).
+Call `elbow_results()` afterwards to get the DataFrame of k/WCSS values
+without refitting. The elbow is a **heuristic**, not a guaranteed optimum —
+pair it with `silhouette_score()` and domain knowledge.
 
 </details>
 
@@ -214,7 +216,8 @@ and domain knowledge.
 <br>
 
 ```python
-Z = cluster.plot_dendrogram(method="ward", metric="euclidean")
+cluster.plot_dendrogram(method="ward", metric="euclidean")  # shows just the plot
+Z = cluster.get_linkage_matrix()                            # get the matrix back
 cluster.fit_agglomerative(n_clusters=3, linkage="ward")
 ```
 
@@ -394,7 +397,7 @@ guarantees (index preservation, immutability, reproducibility).
 pip install build twine
 python -m build
 twine check dist/*
-pip install dist/clustereasy-0.1.2-py3-none-any.whl  # test locally
+pip install dist/clustereasy-0.1.3-py3-none-any.whl  # test locally
 twine upload --repository testpypi dist/*             # TestPyPI first
 twine upload dist/*                                    # then PyPI
 ```
